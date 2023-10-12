@@ -15,6 +15,14 @@ public class Flower {
     @Getter
     private FlowerType flowerType;
 
+    public Flower(Flower item)
+    {
+        this.flowerType = item.flowerType;
+        this.color = item.color;
+        this.price = item.price;
+        this.sepalLength = item.sepalLength;
+    }
+
     public String getColor() {
         return color.toString();
     }
