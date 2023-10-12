@@ -1,27 +1,28 @@
 package flower.store;
 
-import java.rmi.Remote;
-import java.util.ArrayList;
-import java.util.*;
 
-public class FlowerBucket
-{
-    private List<FlowerPack> packs = new ArrayList<FlowerPack>();
-    public void AddPack(FlowerPack newPack)
-    {
-        packs.add(newPack);
+import java.util.ArrayList;
+import java.util.List;
+
+public class FlowerBucket extends Item {
+    private List<FlowerPack> flowerPacks = new ArrayList<>(); 
+
+    public void add(FlowerPack flowerPack) {
+        this.flowerPacks.add(flowerPack);
     }
-    public double GetPrice() {
-        double sum = 0;
-        for(FlowerPack pack : packs) {
-            sum += pack.GetPrice();
+
+    public double getPrice() {
+        double price = 0;
+
+        for (FlowerPack flowerPack : flowerPacks) {
+            price += flowerPack.GetPrice();
         }
-        return sum;
+
+        return price;
     }
+
     public void addFlowerPack(FlowerPack flowerPack) {
-        
+        flowerPacks.add(flowerPack);
     }
-    public Integer getPrice() {
-        return null;
-    }
+    
 }

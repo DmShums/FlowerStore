@@ -2,29 +2,33 @@ package flower.store;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import org.junit.jupiter.api.Assertions;
 
+import java.util.Random;
+
 public class FlowerBucketTest {
+    private static final Random RANDOM_GENERATOR = new Random();
+    private static final int MAX_QUANTITY = 1000;
+    private static final int MAX_PRICE = 100;
+
     private FlowerBucket flowerBucket;
 
     @BeforeEach
-    public void setUp() {
+    public void init() {
         flowerBucket = new FlowerBucket();
     }
 
     @Test
-    public void testPriceCalculation() {
-        Flower rose = createFlower(FlowerType.ROSE, 50); // Rose with a price of 50
-        FlowerPack flowerPack = new FlowerPack(rose, 10); // 10 roses
-        flowerBucket.addFlowerPack(flowerPack);
-
-        Assertions.assertEquals(500, flowerBucket.getPrice()); // 10 roses * 50 price each
-    }
-
-    private Flower createFlower(FlowerType type, int price) {
+    public void testPrice() {
+        int price = RANDOM_GENERATOR.nextInt(MAX_PRICE);
+        int quantity = RANDOM_GENERATOR.nextInt(MAX_QUANTITY);
         Flower flower = new Flower();
-        flower.setFlowerType(type);
+        flower.setFlowerType(FlowerType.ROSE);
+        Assertions.assertEquals(FlowerType.ROSE, flower.getFlowerType());
         flower.setPrice(price);
-        return flower;
+        FlowerPack flowerPack = new FlowerPack(flower, quantity);
+        flowerBucket.addFlowerPack(flowerPack);
+        Assertions.assertEquals(price * quantity, flowerBucket.getPrice());
     }
 }
